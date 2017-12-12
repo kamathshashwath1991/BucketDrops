@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_add_it_corner_radius_purple">2dp</dimen>
+    <dimen name="btn_add_it_stroke_width">1dp</dimen>
+    <dimen name="btn_add_it_corner_radius_green">2dp</dimen>
+</resources>
