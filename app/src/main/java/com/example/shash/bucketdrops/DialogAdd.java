@@ -12,6 +12,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.shash.bucketdrops.beans.Drop;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * Created by shash on 12/12/2017.
  */
@@ -40,16 +45,47 @@ public class DialogAdd extends DialogFragment{
         mBtnClose= view.findViewById(R.id.btn_close);
         mInputWhen= view.findViewById(R.id.bpv_date);
         mInputWhat=view.findViewById(R.id.et_drop);
-        mBtnAdd=view.findViewById(R.id.btn_add);
+        mBtnAdd=view.findViewById(R.id.btn_add_it);
 
         mBtnClose.setOnClickListener(mBtnClickListener);
+        mBtnAdd.setOnClickListener(mBtnClickListener);
     }
 
     private View.OnClickListener mBtnClickListener= new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Log.d(TAG, "onClick: Close button was clicked");
+
+            int id= v.getId();
+
+            switch (id){
+                case R.id.btn_add_it:
+                    addAction();
+                    break;
+            }
             dismiss();
         }
     };
+
+    private void addAction() {
+        String what = mInputWhat.getText().toString();
+        long now= System.currentTimeMillis();
+
+        Realm.init(getContext());
+
+        // create your Realm configuration
+        RealmConfiguration configuration = new RealmConfiguration.
+                Builder().
+                deleteRealmIfMigrationNeeded().
+                build();
+
+        Realm.setDefaultConfiguration(configuration);
+        Realm realm=Realm.getDefaultInstance();
+        Drop drop= new Drop(what, now, 0, false);
+        realm.beginTransaction();
+        realm.copyToRealm(drop);
+        realm.commitTransaction();
+        realm.close();
+
+    }
 }
