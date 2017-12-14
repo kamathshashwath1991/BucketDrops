@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import io.realm.Realm;
+
 /**
  * Created by shash on 12/11/2017.
  */
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar mToolbar;
     Button mBtnAdd;
+    Realm mRealm;
 
 
     @Override
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mBtnAdd= findViewById(R.id.btn_add);
         setSupportActionBar(mToolbar);
         initBackgroundImage();
+        mRealm = Realm.getDefaultInstance();
 
         mBtnAdd.setOnClickListener(mBtnAddListener);
     }

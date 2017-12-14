@@ -1,5 +1,6 @@
 package com.example.shash.bucketdrops;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -71,16 +72,19 @@ public class DialogAdd extends DialogFragment{
         String what = mInputWhat.getText().toString();
         long now= System.currentTimeMillis();
 
-        Realm.init(getContext());
 
-        // create your Realm configuration
+        /* Realm.init(Context);
         RealmConfiguration configuration = new RealmConfiguration.
                 Builder().
                 deleteRealmIfMigrationNeeded().
                 build();
 
         Realm.setDefaultConfiguration(configuration);
+        */
+
         Realm realm=Realm.getDefaultInstance();
+
+
         Drop drop= new Drop(what, now, 0, false);
         realm.beginTransaction();
         realm.copyToRealm(drop);
