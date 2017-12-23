@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.shash.bucketdrops.adapters.AdapterDrops;
+import com.example.shash.bucketdrops.adapters.Divider;
 import com.example.shash.bucketdrops.beans.Drop;
 import com.example.shash.bucketdrops.widgets.BucketRecyclerView;
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView=findViewById(R.id.rv_drops);
         mAdapter= new AdapterDrops(this,mResults);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new Divider(this,LinearLayoutManager.VERTICAL));
 
         mRecyclerView.hideIfEmpty(mToolbar);
         mRecyclerView.showIfEmpty(mEmptyView);
